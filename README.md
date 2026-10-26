@@ -29,6 +29,26 @@ style.css   Tampilan sentuh untuk HP
 app.js      Logika papan, timer, dan skor terbaik lokal
 ```
 
+## Versi APK Android
+
+Folder `android/` berisi proyek Android (WebView) yang menampilkan game
+yang sama dari aset lokal di dalam APK — jadi APK-nya tetap offline,
+tanpa izin internet.
+
+Setiap push ke `main` yang menyentuh `android/` akan menjalankan
+GitHub Actions (`.github/workflows/build-apk.yml`): membangun APK debug
+dan membuat / memperbarui Release `v1.0` dengan file
+`app-debug.apk` terlampir. Cara pasang:
+
+1. Buka halaman Releases di repo ini, unduh `app-debug.apk` dari
+   Release `v1.0`.
+2. Di HP, izinkan install dari sumber tidak dikenal untuk browser /
+   pengelola file yang dipakai, sekali saja.
+3. Pasang APK, buka aplikasi "Teka-Teki", mainkan offline.
+
+Catatan: ini APK debug untuk pemakaian pribadi, bukan APK rilis
+Play Store yang ditandatangani kunci rilis.
+
 ## Rencana berikutnya (opsional)
 
 - Level 5 × 5
