@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Teka-Teki Susun Angka</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Teka-Teki Susun Angka</h1>
+  <p class="hint">Ketuk ubin di sebelah kotak kosong untuk menggesernya. Susun angka 1, 2, 3 … secara berurutan. Game ini offline — tidak butuh internet setelah file-nya diunduh.</p>
+
+  <section class="controls">
+    <label>Ukuran:
+      <select id="size">
+        <option value="3">3 × 3 — Mudah</option>
+        <option value="4">4 × 4 — Sulit</option>
+      </select>
+    </label>
+    <button id="btn-new">Game Baru</button>
+  </section>
+
+  <section class="stats">
+    <span>Langkah: <b id="moves">0</b></span>
+    <span>Waktu: <b id="time">0:00</b></span>
+    <span>Terbaik: <b id="best">—</b></span>
+  </section>
+
+  <div id="board" role="grid" aria-label="Papan teka-teki"></div>
+  <p id="message" aria-live="polite"></p>
+  <p class="hint">Tips: ubin yang bisa digeser ditandai lebih terang. Tombol panah di keyboard juga bisa dipakai.</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
