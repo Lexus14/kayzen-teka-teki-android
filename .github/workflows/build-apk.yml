@@ -4,6 +4,7 @@ name: Build APK dan Release
 # memperbarui Release v1.0 dengan APK tersebut. APK debug bisa langsung
 # dipasang di HP untuk pemakaian pribadi (bukan APK rilis Play Store
 # yang ditandatangani kunci rilis).
+# By : Zhangxen
 "on":
   push:
     branches: [main]
