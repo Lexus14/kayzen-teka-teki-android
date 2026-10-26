@@ -1,0 +1,54 @@
+name: Build APK dan Release
+
+# Berjalan setiap push ke main: membangun APK debug, lalu membuat /
+# memperbarui Release v1.0 dengan APK tersebut. APK debug bisa langsung
+# dipasang di HP untuk pemakaian pribadi (bukan APK rilis Play Store
+# yang ditandatangani kunci rilis).
+"on":
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - '.github/workflows/build-apk.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install platform dan build-tools
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Install Gradle 8.5
+        run: |
+          curl -L -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -q /tmp/gradle.zip -d /tmp
+          echo "/tmp/gradle-8.5/bin" >> "$GITHUB_PATH"
+
+      - name: Build APK debug
+        working-directory: android
+        run: gradle assembleDebug --no-daemon
+
+      - name: Buat / perbarui Release v1.0 dengan APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0
+          name: "Teka-Teki v1.0"
+          body: "APK game Teka-Teki Susun Angka untuk Android (debug, pemakaian pribadi). Unduh file .apk, pasang di HP, mainkan offline."
+          files: android/app/build/outputs/apk/debug/app-debug.apk
+          make_latest: true
